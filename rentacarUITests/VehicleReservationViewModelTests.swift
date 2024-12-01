@@ -1,10 +1,18 @@
+//
+//  VehicleReservationViewModelTests.swift
+//  rentacar
+//
+//  Created by dorenalto mangueira couto on 24/11/24.
+//
+
+
 import XCTest
-@testable import VehicleReservationApp
+@testable import rentacar
 
 class VehicleReservationViewModelTests: XCTestCase {
     
-    var viewModel: VehicleReservationViewModel!
-    var vehicle: Vehicle!
+    var viewModel: VehicleReservationViewModel?
+    var vehicle: Vehicle?
     
     override func setUp() {
         super.setUp()
@@ -22,6 +30,7 @@ class VehicleReservationViewModelTests: XCTestCase {
     
     func testReserveVehicle_Success() {
         // Testando reserva bem-sucedida
+        guard let viewModel, let vehicle else { return }
         let startDate = Date()
         let endDate = startDate.addingTimeInterval(86400) // Um dia depois
         
@@ -34,6 +43,7 @@ class VehicleReservationViewModelTests: XCTestCase {
     
     func testReserveVehicle_Error() {
         // Testando erro quando o veículo não está disponível
+        guard let viewModel, let vehicle else { return }
         let startDate = Date().addingTimeInterval(86400) // Amanhã
         let endDate = startDate.addingTimeInterval(86400) // Dois dias depois
         
@@ -46,6 +56,7 @@ class VehicleReservationViewModelTests: XCTestCase {
     
     func testReserveVehicle_InvalidVehicle() {
         // Testando quando o veículo não é encontrado
+        guard let viewModel, let vehicle else { return }
         let invalidVehicle = Vehicle(id: UUID(), name: "Carro Inválido", model: "Modelo X", availableDates: [Date()])
         let startDate = Date()
         let endDate = startDate.addingTimeInterval(86400)
