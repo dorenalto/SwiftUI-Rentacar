@@ -10,7 +10,7 @@ struct VehicleReservationView: View {
     var body: some View {
         NavigationView {
             VStack {
-                Text("Reserve um Veículo")
+                Text(LocalizedStrings.reserveVehicleTitle)
                     .font(.title)
                     .padding()
                 
@@ -20,7 +20,7 @@ struct VehicleReservationView: View {
                         Text(vehicle.name)
                         Spacer()
                         Text(vehicle.model)
-                            .foregroundColor(.gray)
+                            .foregroundStyle(.gray)
                     }
                     .onTapGesture {
                         selectedVehicle = vehicle
@@ -32,19 +32,19 @@ struct VehicleReservationView: View {
                 
                 if let selectedVehicle = selectedVehicle {
                     VStack {
-                        DatePicker("Data de Início", selection: $startDate, displayedComponents: .date)
+                        DatePicker(LocalizedStrings.startDateLabel, selection: $startDate, displayedComponents: .date)
                             .padding()
-                        DatePicker("Data de Término", selection: $endDate, displayedComponents: .date)
+                        DatePicker(LocalizedStrings.endDateLabel, selection: $endDate, displayedComponents: .date)
                             .padding()
                         
                         Button(action: {
                             viewModel.reserveVehicle(vehicle: selectedVehicle, startDate: startDate, endDate: endDate)
                         }) {
-                            Text("Reservar Veículo")
+                            Text(LocalizedStrings.reserveButtonTitle)
                                 .font(.headline)
                                 .padding()
-                                .foregroundColor(.white)
-                                .background(Color.blue)
+                                .foregroundStyle(.white)
+                                .background(Color.primaryBlue)
                                 .cornerRadius(8)
                         }
                         .padding()
@@ -54,18 +54,18 @@ struct VehicleReservationView: View {
                 // Mensagens de erro ou sucesso
                 if let errorMessage = viewModel.errorMessage {
                     Text(errorMessage)
-                        .foregroundColor(.red)
+                        .foregroundStyle(.errorRed)
                         .padding()
                 }
                 if let reservation = viewModel.reservation {
-                    Text("Reserva Confirmada: \(reservation.vehicle.name) de \(formatDate(reservation.startDate)) a \(formatDate(reservation.endDate))")
-                        .foregroundColor(.green)
+                    Text(LocalizedStrings.reservationSuccess + "\(reservation.vehicle.name) de \(formatDate(reservation.startDate)) a \(formatDate(reservation.endDate))")
+                        .foregroundStyle(.successGreen)
                         .padding()
                 }
                 
                 Spacer()
             }
-            .navigationTitle("Reservas")
+            .navigationTitle(LocalizedStrings.reserveVehicleTitle)
         }
     }
     

@@ -1,3 +1,11 @@
+//
+//  LocalizedStrings.swift
+//  rentacar
+//
+//  Created by dorenalto mangueira couto on 24/11/24.
+//
+
+
 // LocalizedStrings.swift
 import Foundation
 
